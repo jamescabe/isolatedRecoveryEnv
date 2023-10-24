@@ -1,0 +1,15 @@
+name_init:
+  config_vars:
+    HOSTNAME: TEST01
+
+
+  pre_mgmtd_tasks:
+    - "shell:/bin/pwd >> /tmp/pre-log.txt"
+  post_mgmtd_tasks:
+    - "shell:/bin/date"
+    - "shell:/usr/local/bin/sc interface br0 mac address `cat /sys/class/net/eth0/address`"
+    - "shell:/usr/local/bin/sc interface br1 mac address `cat /sys/class/net/eth1/address`"
+    - "shell:/usr/local/bin/sc interface br2 mac address `cat /sys/class/net/eth2/address`"
+    - "shell:/usr/local/bin/sc interface br3 mac address `cat /sys/class/net/eth3/address`"
+    - "cli:en;conf t;write memory;reboot noconfirm"
+
